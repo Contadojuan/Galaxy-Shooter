@@ -10,8 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _mov = 10.0f;
     [SerializeField]
-    private float _fireRate = 0.25f;
+    private float _fireRate = 0.40f;
     private float _nextFire = 0.0f;
+    public bool canTripleShot = false;
     void Start()
     {
         transform.position = new Vector2(0, 0);
@@ -24,7 +25,7 @@ public class Player : MonoBehaviour
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFire)
         {
             ShootLaser();
-        }
+        }        
     }
     private void ShipMovement()
     {
@@ -57,8 +58,25 @@ public class Player : MonoBehaviour
         }
     }
     private void ShootLaser()
-    {
+    { 
+        if (canTripleShot == false)
+        {
+            Instantiate(_laser, new Vector3(transform.position.x, transform.position.y + 0.88f, 0), Quaternion.identity);
+        }
+        else if (canTripleShot == true)
+        {
+            Instantiate(_laser, new Vector3(transform.position.x, transform.position.y + 0.88f, 0), Quaternion.identity);
+            Instantiate(_laser, new Vector3(transform.position.x + 0.555f, transform.position.y + 0.3f, 0), Quaternion.identity);
+            Instantiate(_laser, new Vector3(transform.position.x - 0.555f, transform.position.y + 0.3f, 0), Quaternion.identity);
+        }      
         _nextFire = Time.time + _fireRate;
-        Instantiate(_laser, new Vector3(transform.position.x, transform.position.y + 0.88f, 0), Quaternion.identity);
+    }
+    public void TripleShotPowerUpOn(){
+        canTripleShot = true;
+        StartCoroutine(TripleShotPowerDownRoutine());
+    }
+    public IEnumerator TripleShotPowerDownRoutine(){
+        yield return new WaitForSeconds(5);
+        canTripleShot = false;
     }
 }

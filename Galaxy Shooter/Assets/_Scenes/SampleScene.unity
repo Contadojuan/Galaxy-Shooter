@@ -160,7 +160,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f076769b76a20d444a2ccaea0fd4cca9, type: 2}
+  - {fileID: 2100000, guid: 14f03ea0cf365d94aa74ce2537d355f3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -306,7 +306,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f73cb5d5f6011fc42bf3909854ec274e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mov: 10
+  _laser: {fileID: 1704454395867248, guid: d77f738d34d752140a7f4f4de7de0410, type: 2}
+  _mov: 10
+  _fireRate: 0.25
 --- !u!212 &1315765164
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -360,7 +362,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1315765162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.69, y: -1.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children: []
   m_Father: {fileID: 0}
