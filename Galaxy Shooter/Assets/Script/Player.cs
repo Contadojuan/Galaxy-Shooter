@@ -5,8 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float mov;
-    // Use this for initialization
+    [SerializeField]
+    private GameObject _laser;
+    [SerializeField]
+    private float _mov = 10.0f;
+    [SerializeField]
+    private float _fireRate = 0.25f;
+    private float _nextFire = 0.0f;
     void Start()
     {
         transform.position = new Vector2(0, 0);
@@ -15,13 +20,17 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		ShipMovement();
+        ShipMovement();
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFire)
+        {
+            ShootLaser();
+        }
     }
     private void ShipMovement()
     {
         float movHor = Input.GetAxis("Horizontal");
         float movVer = Input.GetAxis("Vertical");
-        transform.Translate(new Vector2(movHor, movVer) * mov * Time.deltaTime);
+        transform.Translate(new Vector2(movHor, movVer) * _mov * Time.deltaTime);
 
 
         //Y
@@ -46,5 +55,10 @@ public class Player : MonoBehaviour
             transform.position = new Vector2(-transform.position.x, transform.position.y);
             Debug.Log("Passei pra esquerda");
         }
+    }
+    private void ShootLaser()
+    {
+        _nextFire = Time.time + _fireRate;
+        Instantiate(_laser, new Vector3(transform.position.x, transform.position.y + 0.88f, 0), Quaternion.identity);
     }
 }
