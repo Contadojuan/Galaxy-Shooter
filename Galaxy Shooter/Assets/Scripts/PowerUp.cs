@@ -12,12 +12,24 @@ public class PowerUp : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
             if (player != null)
             {
-				player.TripleShotPowerUpOn();
+                if (this.CompareTag("tripleShot"))
+                {
+                    player.TripleShotPowerUpOn();
+                }
+                else if (this.CompareTag("speedPowerup"))
+                {
+                    player.SpeedPowerUpOn();
+                }
+                else if (this.CompareTag("shieldPowerup"))
+                {
+                    player.ShieldPowerUpOn();
+                }
                 Destroy(this.gameObject);
             }
         }
