@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
+    [SerializeField]
     private float _speed = 3.0f;
     void Update()
     {
@@ -26,9 +27,10 @@ public class PowerUp : MonoBehaviour
                 {
                     player.SpeedPowerUpOn();
                 }
-                else if (this.CompareTag("shieldPowerup"))
-                {
+                else if (this.CompareTag("shieldPowerUp"))
+                {   
                     player.ShieldPowerUpOn();
+
                 }
                 Destroy(this.gameObject);
             }

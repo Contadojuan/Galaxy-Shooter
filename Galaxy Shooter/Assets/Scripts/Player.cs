@@ -10,11 +10,17 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _mov = 8.0f;
     [SerializeField]
+     private GameObject myExplosion;
+    [SerializeField]
+    public GameObject _shieldPlayer;
+
     private float _fireRate = 0.40f;
     private float _nextFire = 0.0f;
     public bool canTripleShot = false;
     public bool canSpeedUp = false;
     public bool canShield = false;
+    public int lifePoints = 3;
+    [SerializeField]
     void Start()
     {
         transform.position = new Vector2(0, 0);
@@ -30,6 +36,7 @@ public class Player : MonoBehaviour
             ShootLaser();
         }
 
+
     }
     private void ShipMovement()
     {
@@ -39,14 +46,14 @@ public class Player : MonoBehaviour
 
         if (canSpeedUp == false)
         {
-                transform.Translate(new Vector2(movHor, movVer) * _mov * Time.deltaTime);
+            transform.Translate(new Vector2(movHor, movVer) * _mov * Time.deltaTime);
         }
         else if (canSpeedUp == true)
         {
-              transform.Translate(new Vector2(movHor, movVer) * _mov * 1.75f* Time.deltaTime);
+            transform.Translate(new Vector2(movHor, movVer) * _mov * 1.75f * Time.deltaTime);
         }
 
-    
+
 
 
 
@@ -74,6 +81,15 @@ public class Player : MonoBehaviour
             Debug.Log("Passei pra esquerda");
         }
     }
+
+    public void ShipLife()
+    {
+        if (lifePoints < 1)
+        {
+            Instantiate(myExplosion, transform.position, Quaternion.identity);
+            Destroy(this.gameObject);
+        }
+    }
     private void ShootLaser()
     {
         if (canTripleShot == false)
@@ -99,22 +115,21 @@ public class Player : MonoBehaviour
 
         StartCoroutine(SpeedDownRountine());
     }
-    public void ShieldPowerUpOn(){
+    public void ShieldPowerUpOn()
+    {
         canShield = true;
-        ShieldDownRoutine();
+        _shieldPlayer.gameObject.SetActive(true);
     }
+
     public IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5);
+
         canTripleShot = false;
     }
     public IEnumerator SpeedDownRountine()
     {
         yield return new WaitForSeconds(5);
         canSpeedUp = false;
-    }
-    public IEnumerator ShieldDownRoutine(){
-        yield return new WaitForSeconds(5);
-        canShield = false;
     }
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - tripleShot
   - speedPowerup
+  - Laser
+  - Enemy
+  - shieldPowerUp
   layers:
   - Default
   - TransparentFX
