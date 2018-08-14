@@ -10,23 +10,34 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _mov = 8.0f;
     [SerializeField]
-     private GameObject myExplosion;
+    private GameObject myExplosion;
     [SerializeField]
     public GameObject _shieldPlayer;
-
+    [SerializeField]
     private float _fireRate = 0.40f;
     private float _nextFire = 0.0f;
     public bool canTripleShot = false;
     public bool canSpeedUp = false;
     public bool canShield = false;
     public int lifePoints = 3;
-    [SerializeField]
+    public UI_Manager uiManager;
+    public GameManager gameManager;
+    public SpawnManager spawnManager;
+
+
     void Start()
     {
         transform.position = new Vector2(0, 0);
+        uiManager = GameObject.Find("Canvas").GetComponent<UI_Manager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        if (uiManager != null)
+        {
+            uiManager.UpdateLives(lifePoints);
+        }
+        spawnManager.startMyGame();
     }
 
-    // Update is called once per frame
     void Update()
     {
         ShipMovement();
@@ -81,12 +92,21 @@ public class Player : MonoBehaviour
             Debug.Log("Passei pra esquerda");
         }
     }
+    public void finishGame()
+    {
+        uiManager.title.gameObject.SetActive(true);
+        if (gameManager != null)
+        {
+            gameManager.gameOver = true;
+        }
 
+    }
     public void ShipLife()
     {
         if (lifePoints < 1)
         {
             Instantiate(myExplosion, transform.position, Quaternion.identity);
+            finishGame();
             Destroy(this.gameObject);
         }
     }

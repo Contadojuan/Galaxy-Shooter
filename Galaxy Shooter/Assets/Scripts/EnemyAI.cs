@@ -12,7 +12,15 @@ public class EnemyAI : MonoBehaviour
     private GameObject _explosion;
     Player player;
 
-    // Update is called once per frame
+    private UI_Manager uiManager;
+    private GameManager _gameManager;
+
+
+    void Start()
+    {
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        uiManager = GameObject.Find("Canvas").GetComponent<UI_Manager>();
+    }
     void Update()
     {
         transform.Translate(Vector3.down * _speedEnemy * Time.deltaTime);
@@ -23,6 +31,13 @@ public class EnemyAI : MonoBehaviour
         if (this.transform.position.y < -6.3f)
         {
             transform.position = new Vector2(_randomRange, 8);
+        }
+        if (_gameManager != null)
+        {
+            if (_gameManager.gameOver == true)
+            {
+                Destroy(this.gameObject);
+            }
         }
 
     }
@@ -45,6 +60,7 @@ public class EnemyAI : MonoBehaviour
                         else
                         {
                             player.lifePoints--;
+                            player.uiManager.UpdateLives(player.lifePoints);
                             player.ShipLife();
                         }
                     }
@@ -52,9 +68,13 @@ public class EnemyAI : MonoBehaviour
 
                 else
                 {
-                    Destroy(other.gameObject);
-                }
+                    if (uiManager != null)
+                    {
+                        uiManager.UpdateScore();
+                        Destroy(other.gameObject);
+                    }
 
+                }
                 Instantiate(_explosion, transform.position, Quaternion.identity);
                 Destroy(this.gameObject);
             }
