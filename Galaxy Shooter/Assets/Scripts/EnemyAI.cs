@@ -14,6 +14,9 @@ public class EnemyAI : MonoBehaviour
 
     private UI_Manager uiManager;
     private GameManager _gameManager;
+    [SerializeField]
+    private AudioClip _explosionSound;
+
 
 
     void Start()
@@ -36,6 +39,7 @@ public class EnemyAI : MonoBehaviour
         {
             if (_gameManager.gameOver == true)
             {
+
                 Destroy(this.gameObject);
             }
         }
@@ -60,8 +64,10 @@ public class EnemyAI : MonoBehaviour
                         else
                         {
                             player.lifePoints--;
+                            player.Damage();
                             player.uiManager.UpdateLives(player.lifePoints);
                             player.ShipLife();
+
                         }
                     }
                 }
@@ -71,6 +77,7 @@ public class EnemyAI : MonoBehaviour
                     if (uiManager != null)
                     {
                         uiManager.UpdateScore();
+                        AudioSource.PlayClipAtPoint(_explosionSound, Camera.main.transform.position);
                         Destroy(other.gameObject);
                     }
 

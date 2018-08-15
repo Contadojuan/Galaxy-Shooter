@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114758424688783782}
   - component: {fileID: 58015744601476482}
   - component: {fileID: 50062541256517814}
+  - component: {fileID: 95982386536196878}
   m_Layer: 0
   m_Name: Triple_Shoot_Powerup
   m_TagString: tripleShot
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1913985729486396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: 3.41, z: 0}
+  m_LocalPosition: {x: 1693.3682, y: -85.61754, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,6 +79,24 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 2.5599997
+--- !u!95 &95982386536196878
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1913985729486396}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c82d1f4fd361c794dab5a276cbcdfe07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114758424688783782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838281e5f27043040bed3bfe376e8f31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _speed: 3
+  _powerUpSound: {fileID: 8300000, guid: 5ee343246919d2b4bba63ae629e95494, type: 3}
 --- !u!212 &212072201043235802
 SpriteRenderer:
   m_ObjectHideFlags: 1

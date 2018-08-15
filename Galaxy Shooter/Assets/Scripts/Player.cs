@@ -23,26 +23,32 @@ public class Player : MonoBehaviour
     public UI_Manager uiManager;
     public GameManager gameManager;
     public SpawnManager spawnManager;
-
+    private AudioSource _laserShoot;
+    public GameObject[] enginesFire;
+    public int hitCount = 0;
+    [SerializeField]
+    private int _randomEngineDamage;
 
     void Start()
-    {
+    {   _randomEngineDamage = Random.Range(0,2);
         transform.position = new Vector2(0, 0);
         uiManager = GameObject.Find("Canvas").GetComponent<UI_Manager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         spawnManager = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
+        _laserShoot = GetComponent<AudioSource>();
         if (uiManager != null)
         {
             uiManager.UpdateLives(lifePoints);
         }
         spawnManager.startMyGame();
+        hitCount = 0;
     }
 
     void Update()
     {
         ShipMovement();
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFire)
+        if ((Input.GetKey(KeyCode.Space) || Input.GetMouseButton(0)) && Time.time >= _nextFire)
         {
             ShootLaser();
         }
@@ -101,6 +107,29 @@ public class Player : MonoBehaviour
         }
 
     }
+    public void Damage()
+    {
+        hitCount++;
+
+        if (hitCount == 1 && _randomEngineDamage == 0)
+        {
+            enginesFire[0].SetActive(true);
+        }
+        if (hitCount == 2 && _randomEngineDamage == 0)
+        {
+            enginesFire[1].SetActive(true);
+        }
+        if (hitCount == 1 && _randomEngineDamage == 1)
+        {
+            enginesFire[1].SetActive(true);
+        }
+        if (hitCount == 2 && _randomEngineDamage == 1)
+        {
+            enginesFire[0].SetActive(true);
+        }
+
+
+    }
     public void ShipLife()
     {
         if (lifePoints < 1)
@@ -112,6 +141,7 @@ public class Player : MonoBehaviour
     }
     private void ShootLaser()
     {
+        _laserShoot.Play();
         if (canTripleShot == false)
         {
             Instantiate(_laser, new Vector3(transform.position.x, transform.position.y + 0.88f, 0), Quaternion.identity);
