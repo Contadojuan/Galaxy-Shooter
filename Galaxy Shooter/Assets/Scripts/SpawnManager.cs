@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyShip;
     [SerializeField]
     private GameObject[] _powerUps;
-    // Use this for initialization
     private GameManager _gameManager;
 
     public void Start()
