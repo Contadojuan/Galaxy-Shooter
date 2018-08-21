@@ -55,11 +55,11 @@ GameObject:
   - component: {fileID: 4590764756210300}
   - component: {fileID: 212437013559798042}
   - component: {fileID: 114500516100836204}
+  - component: {fileID: 114909781087713992}
   - component: {fileID: 70129943410548794}
   - component: {fileID: 50140472966983492}
   - component: {fileID: 82129294654300594}
   - component: {fileID: 95974226478237566}
-  - component: {fileID: 114909781087713992}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -121,7 +121,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1418529189083844}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1700.375, y: -87.33973, z: 0}
+  m_LocalPosition: {x: 5.61, y: 0, z: 0}
   m_LocalScale: {x: 0.35, y: 0.35, z: 0.35}
   m_Children:
   - {fileID: 4526329001882272}
@@ -411,6 +411,7 @@ MonoBehaviour:
   canSpeedUp: 0
   canShield: 0
   lifePoints: 3
+  lifePointsP2: 3
   uiManager: {fileID: 0}
   gameManager: {fileID: 0}
   spawnManager: {fileID: 0}
@@ -604,7 +605,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 1b4a8fdd39d3a45d0a9ee484ad6800ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.3439261, b: 0.24056602, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

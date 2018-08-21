@@ -9,7 +9,6 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyShip;
     [SerializeField]
     private GameObject[] _powerUps;
-    // Use this for initialization
     private GameManager _gameManager;
 
     public void Start()
@@ -17,7 +16,7 @@ public class SpawnManager : MonoBehaviour
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     public void startMyGame()
-    {
+    {  
         if (_gameManager != null)
         {
             StartCoroutine(spawnEnemy());
@@ -42,5 +41,4 @@ public class SpawnManager : MonoBehaviour
             yield return new WaitForSeconds(8.0f);
         }
     }
-
 }

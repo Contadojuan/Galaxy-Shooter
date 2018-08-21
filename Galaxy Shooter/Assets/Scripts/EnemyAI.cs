@@ -49,6 +49,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Laser"))
         {
+            AudioSource.PlayClipAtPoint(_explosionSound, Camera.main.transform.position);
             {
                 if (other.gameObject.CompareTag("Player"))
                 {
@@ -59,14 +60,26 @@ public class EnemyAI : MonoBehaviour
                         {
                             player.canShield = false;
                             player._shieldPlayer.SetActive(false);
+                            Instantiate(_explosion, transform.position, Quaternion.identity);
+                            Destroy(this.gameObject);
                             return;
                         }
                         else
                         {
-                            player.lifePoints--;
-                            player.Damage();
-                            player.uiManager.UpdateLives(player.lifePoints);
-                            player.ShipLife();
+                            if (player.gameObject.name == "Player_1(Clone)")
+                            {
+                                player.lifePoints--;
+                                player.Damage();
+                                player.uiManager.UpdateLives(player.lifePoints);
+                                player.ShipLife();
+                            }
+                            else if (player.gameObject.name == "Player_2(Clone)")
+                            {
+                                player.lifePointsP2--;
+                                player.Damage();
+                                player.uiManager.UpdateLivesP2(player.lifePointsP2);
+                                player.ShipLife();
+                            }
 
                         }
                     }
@@ -77,7 +90,6 @@ public class EnemyAI : MonoBehaviour
                     if (uiManager != null)
                     {
                         uiManager.UpdateScore();
-                        AudioSource.PlayClipAtPoint(_explosionSound, Camera.main.transform.position);
                         Destroy(other.gameObject);
                     }
 
